@@ -15,7 +15,7 @@ class App extends Component {
         this.state = {
             todos: ['köpa kaffe','köpa kaka','Brygg kaffe','Fika']
         }
-        //this tappar sin referens nedan och vi behöver binda this till funktionen addItem.
+        //this tappar sin referens nedan och vi behöver binda this till
         this.addItem = this.addItem.bind(this)
     }
 
