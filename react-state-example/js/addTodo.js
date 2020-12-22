@@ -3,13 +3,20 @@ import React from 'react';
 class AddTodo extends React.Component {
     constructor(props) {
         super(props);
-    }
+        
+       }
 
     render() {
+        const handleKeyUp = (event) => {
+            if(event.key == 'Enter'){
+                this.props.updateState(event.target.value);
+                
+            }
+        }
+
         return (
             <section>
-                <input type="text" placeholder="Skriv en todo" />
-                <button>{ this.props.buttonText }</button>
+                <input onKeyUp={handleKeyUp} type="text" placeholder="Skriv en todo" />
             </section>
         )
     }

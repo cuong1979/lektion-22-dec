@@ -11,19 +11,36 @@ class App extends Component {
     constructor(props) {
         super(props);
         console.log('this.props är: ', this.props);
+        
+        this.state = {
+            todos: ['köpa kaffe','köpa kaka','Brygg kaffe','Fika']
+        }
+        //this tappar sin referens nedan och vi behöver binda this till funktionen addItem.
+        this.addItem = this.addItem.bind(this)
+    }
+
+    addItem(todo){
+        console.log('Added todo:', todo);
+        this.setState((prevState) =>({
+            todos: prevState.todos.concat(todo)
+
+        }))
     }
 
     render() {
+
+        const todoItems = this.state.todos.map((todoItem, index) => {
+            return <TodoItem text={todoItem} key={index} id={index} />
+        })
+
         return (
             <section className="wrapper">
                 <h1>{ this.props.title }</h1>
+                <p> You have  { this.state.todos.length } </p>
                 <ul className="todo-list">
-                    <TodoItem text="Köp kaffe" done={false} />
-                    <TodoItem text="Köp kaka" done={true} />
-                    <TodoItem text="Brygg kaffe" done={false} />
-                    <TodoItem text="Fika" done={false} />
+                    { todoItems }
                 </ul>
-                <AddTodo buttonText="Lägg till" />
+                <AddTodo updateState={this.addItem} buttonText="Lägg till" />
             </section>
         )
     }
